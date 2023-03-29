@@ -5,28 +5,10 @@ import { Calendar } from "../components/Calendar";
 import cx from "./Students.module.scss";
 import { filterReservationsByStudent } from "../../domain/filterReservationsByStudent";
 
-export const Students = ({id}) => {
-  const { reservations, students, isLoading } = useReservations();
-
+export const Students = ({ id, students, reservations }) => {
   const { goToStudents } = useViewState();
 
-  const hasSelectedStudent = id !== undefined;
-  useEffect(() => {
-    if (isLoading || hasSelectedStudent) {
-      return;
-    }
-
-    const [firstStudent] = students;
-    goToStudents(firstStudent.id);
-  }, [students, isLoading]);
-
-  if (!hasSelectedStudent) {
-    return <>Loading...</>;
-  }
-
-  const selectedStudent = students.find(
-    (courseTaker) => courseTaker.id === id
-  );
+  const selectedStudent = students.find((courseTaker) => courseTaker.id === id);
   const selectedStudentReservations = filterReservationsByStudent(
     reservations,
     selectedStudent

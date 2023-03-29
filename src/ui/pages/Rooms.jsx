@@ -1,31 +1,13 @@
-import { useEffect } from "react";
-import { useReservations } from "../../application/hooks/useReservations";
 import { useViewState } from "../../application/hooks/useViewState";
 import { Calendar } from "../components/Calendar";
 import cx from "./Rooms.module.scss";
 import { filterReservationsByRoom } from "../../domain/filterReservationsByRoom";
 
-export const Rooms = ({ id }) => {
-  const { reservations, rooms, isLoading } = useReservations();
+
+export const Rooms = ({ id, rooms, reservations }) => {
   const { goToRooms } = useViewState();
 
-  const hasSelectedRoom = id !== undefined;
-
-  useEffect(() => {
-    if (isLoading || hasSelectedRoom) {
-      return;
-    }
-
-    const [firstRoom] = rooms;
-    goToRooms(firstRoom.id);
-  }, [reservations, isLoading, hasSelectedRoom]);
-
-  if (!hasSelectedRoom) {
-    return <>Loading...</>;
-  }
-
-  const selectedRoomId = id;
-  const selectedRoom = rooms.find((room) => room.id === selectedRoomId);
+  const selectedRoom = rooms.find((room) => room.id === id);
   const selectedRoomReservations = filterReservationsByRoom(
     reservations,
     selectedRoom
