@@ -1,0 +1,41 @@
+.itemContainer {
+  width: 280px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 5px 10px 10px;
+  justify-self: center;
+  border-radius: 8px;
+}
+
+.itemContainer > h2 {
+  font-size: 18px;
+  text-transform: capitalize;
+}
+
+.itemContainer > p {
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.low {
+  background-color: var(--low);
+}
+
+.moderate {
+  background-color: var(--moderate);
+}
+
+.high {
+  background-color: var(--high);
+}
+
+.veryHigh {
+  background-color: var(--veryHigh);
+}
+
+.none {
+  background-color: var(--none);
+}
