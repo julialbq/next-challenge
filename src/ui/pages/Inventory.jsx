@@ -1,10 +1,7 @@
-import { useInventory } from "../../application/hooks/useInventory";
 import { InventoryItem } from "../components/InventoryItem";
 import cx from "./Inventory.module.scss";
 
-export const Inventory = () => {
-  const { inventoryItems, isLoading } = useInventory();
-
+export const Inventory = ({inventoryItems}) => {
   return (
     <div className={cx.inventoryContainer}>
       {inventoryItems.map((item) => (

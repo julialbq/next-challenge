@@ -1,4 +1,4 @@
-import { getDay, getMinutes, getHours } from "date-fns";
+import { getDay, getMinutes, getHours, parseISO } from "date-fns";
 import cx from "./CalendarEntry.module.scss";
 
 export const CalendarEntry = ({ entry, groupColors }) => {
@@ -6,15 +6,15 @@ export const CalendarEntry = ({ entry, groupColors }) => {
   const entryTimeSpanInMinutes = 30;
   const halfHoursInAnHour = 2;
 
-  const gridColumn = headerSpan + getDay(entry.dateStart);
+  const gridColumn = headerSpan + getDay(parseISO(entry.dateStart));
   const gridRowStart =
     headerSpan +
-    getHours(entry.dateStart) * halfHoursInAnHour +
-    getMinutes(entry.dateStart) / entryTimeSpanInMinutes;
+    getHours(parseISO(entry.dateStart)) * halfHoursInAnHour +
+    getMinutes(parseISO(entry.dateStart)) / entryTimeSpanInMinutes;
   const gridRowEnd =
     headerSpan +
-    getHours(entry.dateEnd) * halfHoursInAnHour +
-    getMinutes(entry.dateEnd) / entryTimeSpanInMinutes;
+    getHours(parseISO(entry.dateEnd)) * halfHoursInAnHour +
+    getMinutes(parseISO(entry.dateEnd)) / entryTimeSpanInMinutes;
 
   return (
     <div

@@ -1,6 +1,4 @@
-import { useReservations } from "../../application/hooks/useReservations";
 import { useViewState } from "../../application/hooks/useViewState";
-import { useEffect } from "react";
 import { Calendar } from "../components/Calendar";
 import cx from "./Students.module.scss";
 import { filterReservationsByStudent } from "../../domain/filterReservationsByStudent";
