@@ -12,10 +12,4 @@ export function App({ Component, pageProps }) {
   );
 }
 
-const AppWithProviders = ({ ...props }) => (
-  <InventoryProvider>
-    <App {...props} />
-  </InventoryProvider>
-);
-
-export default AppWithProviders;
+export default App;
