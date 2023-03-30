@@ -1,4 +1,3 @@
-import { InventoryProvider } from "@/application/providers/InventoryProvider";
 import { Header } from "@/ui/components/Header";
 import "../ui/styles/global.scss";
 
