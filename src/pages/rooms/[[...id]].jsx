@@ -1,11 +1,11 @@
-import { useReservations } from "@/application/hooks/useReservations";
 import { useViewState } from "@/application/hooks/useViewState";
+import { fetchReservations } from "@/infrastructure/inner/fetchReservations";
 import { Rooms } from "@/ui/pages/Rooms";
+import { uniqBy } from "lodash";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-const RoomsPage = () => {
-  const { rooms, reservations, isLoading } = useReservations();
+const RoomsPage = ({ reservations, rooms, isLoading }) => {
   const { goToRooms } = useViewState();
   const router = useRouter();
   const hasSelectedRoom = router.query.id !== undefined;
@@ -31,5 +31,22 @@ const RoomsPage = () => {
     />
   );
 };
+
+export async function getServerSideProps() {
+  const data = await fetchReservations();
+  const reservations = JSON.parse(JSON.stringify(data))
+
+  const rooms = reservations
+    ? uniqBy(
+        reservations.map((reservation) => reservation.room),
+        "id"
+      )
+    : undefined;
+  const isLoading = reservations === undefined;
+
+  return {
+    props: { reservations, rooms, isLoading },
+  };
+}
 
 export default RoomsPage;
