@@ -34,7 +34,7 @@ const RoomsPage = ({ reservations, rooms, isLoading }) => {
 
 export async function getServerSideProps() {
   const data = await fetchReservations();
-  const reservations = JSON.parse(JSON.stringify(data))
+  const reservations = JSON.parse(JSON.stringify(data));
 
   const rooms = reservations
     ? uniqBy(
